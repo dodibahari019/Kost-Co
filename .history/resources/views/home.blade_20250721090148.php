@@ -1,0 +1,3 @@
+@extends('Frame.main')
+
+@end
