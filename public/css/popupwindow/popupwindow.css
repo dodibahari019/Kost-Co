@@ -1,0 +1,252 @@
+/***************************************************************************************************
+PopupWindow - The ultimate popup/dialog/modal jQuery plugin
+    Author          : Gaspare Sganga
+    Version         : 1.0.3
+    License         : MIT
+    Documentation   : http://gasparesganga.com/labs/jquery-popup-window/
+***************************************************************************************************/
+
+/* Overlay */
+.popupwindow_overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 9999999;
+}
+
+/* Window */
+.popupwindow {
+    color: #2600FF;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #2600FF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index:9999999;
+}
+.popupwindow_minimized {
+    width: 200px;
+    box-shadow: none;
+}
+
+/* TitleBar */
+.popupwindow_titlebar {
+    background-color: #2600FF;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popupwindow_titlebar_draggable {
+    cursor: move;
+}
+    /* TitleBar Text */
+    .popupwindow_titlebar_text {
+        color: #FFFFFF;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+    /* TitleBar Buttons */
+    .popupwindow_titlebar_button {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        margin-left: 6px;
+        background-color: #2600FF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+    }
+        .popupwindow_titlebar_button:hover {
+            background-color: #d0d0d0;
+        }
+        .popupwindow_titlebar_button:active {
+            background-color: #c0c0c0;
+        }
+        /* The following classes can be used to customize single buttons */
+        .popupwindow_titlebar_button_close {
+            background-color: #ff1c12;
+            color: #ff1c12;
+            width: 15px; /* Sesuaikan ukuran lingkaran */
+            height: 15px; /* Sesuaikan ukuran lingkaran */
+            border-radius: 50%;
+            border: none; /* Hapus border jika ada */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0; /* Hapus padding */
+        }
+
+        .popupwindow_titlebar_button_close * {
+            display: none; /* Sembunyikan semua elemen anak, termasuk ikon "X" */
+        }
+
+        .popupwindow_titlebar_button_close::before {
+            content: ""; /* Hapus konten default, termasuk ikon "X" */
+        }
+
+        .popupwindow_titlebar_button_close:hover {
+            background-color: #ff1c12;
+        }
+
+        .popupwindow_titlebar_button_close:active {
+            background-color: #ff1c12;
+        }
+
+
+            .popupwindow_titlebar_button_maximize {
+                background-color: #A6A6A6;
+                color: #A6A6A6;
+                width: 15px; /* Sesuaikan ukuran lingkaran */
+                height: 15px; /* Sesuaikan ukuran lingkaran */
+                border-radius: 50%;
+                border: none; /* Hapus border jika ada */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 0; /* Hapus padding */
+            }
+
+            .popupwindow_titlebar_button_maximize * {
+                display: none; /* Sembunyikan semua elemen anak, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_maximize::before {
+                content: ""; /* Hapus konten default, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_maximize:hover {
+                background-color: #A6A6A6;
+            }
+
+            .popupwindow_titlebar_button_maximize:active {
+                background-color: #A6A6A6;
+            }
+
+            .popupwindow_titlebar_button_collapse {
+                background-color: #28c940;
+                color: #28c940;
+                width: 15px; /* Sesuaikan ukuran lingkaran */
+                height: 15px; /* Sesuaikan ukuran lingkaran */
+                border-radius: 50%;
+                border: none; /* Hapus border jika ada */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 0; /* Hapus padding */
+            }
+
+            .popupwindow_titlebar_button_collapse * {
+                display: none; /* Sembunyikan semua elemen anak, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_collapse::before {
+                content: ""; /* Hapus konten default, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_collapse:hover {
+                background-color: #28c940;
+            }
+
+            .popupwindow_titlebar_button_collapse:active {
+                background-color: #28c940;
+            }
+
+            .popupwindow_titlebar_button_minimize {
+                background-color: #ffbd2e;
+                color: #ffbd2e;
+                width: 15px; /* Sesuaikan ukuran lingkaran */
+                height: 15px; /* Sesuaikan ukuran lingkaran */
+                border-radius: 50%;
+                border: none; /* Hapus border jika ada */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 0; /* Hapus padding */
+            }
+
+            .popupwindow_titlebar_button_minimize * {
+                display: none; /* Sembunyikan semua elemen anak, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_minimize::before {
+                content: ""; /* Hapus konten default, termasuk ikon "X" */
+            }
+
+            .popupwindow_titlebar_button_minimize:hover {
+                background-color: #ffbd2e;
+            }
+
+            .popupwindow_titlebar_button_minimize:active {
+                background-color: #ffbd2e;
+            }
+
+/* Content */
+.popupwindow_content {
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: 1000px; /* Adjust based on your needs */
+}
+.popupwindow_content:after {
+    content: "";
+    display: block;
+    height: 10px;
+}
+
+/* Scrollbar Styles */
+.popupwindow_content::-webkit-scrollbar {
+    width: 0px;
+}
+
+.popupwindow_content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.popupwindow_content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* For Firefox */
+.popupwindow_content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* StatusBar */
+.popupwindow_statusbar {
+    background-color: #2600FF;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: 1px solid #2600FF;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+    /* StatusBar Content */
+    .popupwindow_statusbar_content {
+        color: #666;
+        font-family: inherit;
+        font-size: 12px;
+    }
+    /* StatusBar Handle */
+    .popupwindow_statusbar_handle {
+        width: 10px;
+        height: 10px;
+        background-color: #2600FF;
+    }

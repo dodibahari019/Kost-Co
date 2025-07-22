@@ -1,0 +1,193 @@
+<form action="/pengecekan/store" class="windowForm postClass" id="CreateFormX" dataTableId="#DataPengecekanTableId" enctype="multipart/form-data" method="post">
+    @csrf
+    <div class="card-body" style="padding: 3px;">
+        <div class="row">
+            <div class="mb-1 col-6">
+                <label for="noktp" class="form-label fw-semibold">No KTP</label>
+                <input type="text" name="noktp" id="noktpEdit" class="form-control">
+            </div>
+
+            <div class="mb-1 col-6">
+                <label for="namapenghuni" class="form-label fw-semibold">Nama Penghuni</label>
+                <input type="text" name="namapenghuni" id="namapenghuniEdit" class="form-control">
+            </div>
+
+            <div class="mb-1 col-6">
+                <label for="nohp" class="form-label fw-semibold">No. HP</label>
+                <input type="text" name="nohp" id="nohpEdit" class="form-control">
+            </div>
+
+            <div class="mb-1 col-6">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <input type="text" name="email" id="emailEdit" class="form-control">
+            </div>
+
+            <div class="mb-1 col-12">
+                <label for="alamat" class="form-label fw-semibold">Alamat</label>
+                <textarea name="alamat" id="alamatEdit" rows="2" class="form-control">{{ $x->alamat }}</textarea>
+            </div>
+
+            <div class="mb-1 col-12">
+                <label for="status" class="form-label fw-semibold">Status</label>
+                <select onkeydown="EnterButtonIsRunningNowPenghuniEdit(event)" name="status" id="statusEdit" class="form-group form-control" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="Aktif">Aktif</option>
+                    <option value="Tidak Aktif">Tidak Aktif</option>
+                    <option value="Menunggu">Menunggu</option>
+                </select>
+            </div>
+
+        </div>
+      <div class="row">
+        <div class="col-12 mt-3" style="justify-content:flex-end; display:flex;">
+            <button onclick="ButtonSumbitIsRunningPenghuniEdit()" type="button" style="width:120px; text-align:center; font-weight:600; background-color: #2600FF;" class="btn btn-primary">Simpan</button>
+            <button hidden type="submit" id="RealSubmitButtonPenghuniEdit" style="width:120px; text-align:center; font-weight:600; background-color: #2600FF;" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+</form>
+<script>
+    function EnterButtonIsRunningNowPengecekan(event){
+        if(event.key == "Enter" || event.keyCode == 13){
+            event.preventDefault();
+            ButtonSumbitIsRunningPengecekan();
+        }
+    }
+</script>
+<script>
+    function showAlert(message) {
+        Swal.fire({
+            icon: "warning",
+            title: "Peringatan",
+            text: message,
+            confirmButtonColor: "#2600FF",
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    }
+
+    function ButtonSumbitIsRunningPengecekan() {
+        const mobil = document.getElementById('mobil').value.trim();
+        const nama = document.getElementById('nama').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const noHp = document.getElementById('noHp').value.trim();
+        const tanggal = document.getElementById('tanggal').value.trim();
+        const jam = document.getElementById('jam').value.trim();
+        const namaTeknisi = document.getElementById('namaTeknisi').value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const hpRegex = /^[0-9]{10,15}$/;
+        // const tanggalRegex = /^\d{4}-\d{2}-\d{2}$/; // Format: YYYY-MM-DD
+        const jamRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // Format: HH:mm (24 jam)
+
+        if (!mobil) {
+            showAlert("Harap pilih Mobil!");
+        } else if (!nama) {
+            showAlert("Harap isi Nama!");
+        } else if (!email) {
+            showAlert("Harap isi Email!");
+        } else if (!emailRegex.test(email)) {
+            showAlert("Format Email tidak valid!");
+        } else if (!noHp) {
+            showAlert("Harap isi No HP!");
+        } else if (!hpRegex.test(noHp)) {
+            showAlert("No HP harus berupa angka dan panjang 10–15 digit!");
+        } else if (!tanggal) {
+            showAlert("Harap isi Tanggal!");
+        // } else if (!tanggalRegex.test(tanggal)) {
+        //     showAlert("Format Tanggal harus YYYY-MM-DD!");
+        } else if (!jam) {
+            showAlert("Harap isi Jam!");
+        } else if (!jamRegex.test(jam)) {
+            showAlert("Format Jam harus HH:mm (24 jam)!");
+        } else if (!namaTeknisi) {
+            showAlert("Harap isi Teknisi!");
+        } else {
+            // Semua validasi berhasil
+            document.getElementById('RealSubmitButtonPengecekan').click();
+        }
+    }
+</script>
+<script>
+    function formatRupiah(angka) {
+        // pastikan tipe angka adalah number atau konversi ke number
+        angka = parseFloat(angka);
+
+        // jika bukan angka valid, kembalikan default
+        if (isNaN(angka)) return 'Rp 0';
+
+        // ubah ke format Indonesia
+        return angka.toLocaleString('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+
+
+    $(document).ready(function() {
+        $('#mobil').select2({
+            placeholder: "",
+            allowClear: false
+        });
+
+        $('#mobil').on('select2:select', function (e) {
+            const selected = e.params.data.element;
+            const $selected = $(selected);
+
+            // Ambil semua atribut data-*
+            const harga = $selected.data('harga');
+            const warna = $selected.data('warna');
+            const plat = $selected.data('plat');
+            const spesifikasi = $selected.data('spesifikasi');
+            const kapasitas = $selected.data('kapasitas');
+            const transmisi = $selected.data('transmisi');
+
+            // Tampilkan ke elemen tertentu (pastikan input/elemen tujuan punya id yang sesuai)
+            $('#harga').val(harga ? formatRupiah(harga) : 0);
+            $('#warna').val(warna || '');
+            $('#plat').val(plat || '');
+            $('#spesifikasi').val(spesifikasi || '');
+            $('#kapasitas').val(kapasitas || '');
+            $('#transmisi').val(transmisi || '');
+        });
+
+        $('#mobil').on('select2:clear', function () {
+            $('#harga').val(0);
+            $('warna').val(0);
+            $('#plat').val('');
+            $('#spesifikasi').val('');
+            $('#kapasitas').val('');
+            $('#transmisi').val('');
+        });
+    });
+</script>
+<style>
+    /* Select2 agar tampilannya rata dan tinggi sama */
+    .select2-container--default .select2-selection--single {
+        height: 38px !important;
+        padding: 6px 12px;
+        font-size: 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        display: flex;
+        align-items: center; /* buat text-nya rata tengah secara vertikal */
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: normal !important; /* reset default line-height */
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100%;
+        color: #495057;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 38px !important;
+        top: 0px !important;
+    }
+
+    /* HILANGKAN TOMBOL "X" (clear) */
+    .select2-selection__clear {
+        display: none !important;
+    }
+</style>

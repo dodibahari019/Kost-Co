@@ -1,0 +1,94 @@
+/* Menghindari scroll horizontal secara umum */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* body {
+    font-family: Arial, sans-serif;
+} */
+
+.jumbotron {
+    padding: 2rem 1rem;
+    background-color: aliceblue;
+}
+
+#JualId {
+    padding: 1rem;
+    background-color: rgb(64, 0, 241);
+}
+
+#KategoriId {
+    padding: 1rem;
+    background-color: #323030;
+}
+section {
+    padding-top: 5rem;
+}
+
+.mobil-naik {
+    margin-top: -200px;
+}
+
+@media (max-width: 768px) {
+    .mobil-naik {
+        margin-top: -150px;
+        /* Kurangi efek naik di layar kecil */
+    }
+}
+
+
+/* OTHER  */
+.hero-bg-blue-custom {
+    background: #1a2be6;
+    border-radius: 180px 90px 110px 70px;
+    position: absolute;
+    top: 0;
+    left: -160px;
+    width: 130%;
+    height: 100%;
+    z-index: 1;
+    box-shadow: 0 8px 32px 0 rgba(26, 43, 230, 0.18);
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .hero-bg-blue-custom {
+        left: 0;
+        width: 100%;
+        border-radius: 2rem;
+        min-height: 250px;
+    }
+
+    .hero-content {
+        position: relative;
+        padding: 1rem !important;
+        height: auto;
+        z-index: 3;
+    }
+
+    .img-fluid {
+        width: 100%;
+        position: relative;
+        margin: 0 auto 1rem auto;
+        display: block;
+        z-index: 2;
+    }
+
+    .col-md-7,
+    .col-md-5 {
+        min-height: unset !important;
+    }
+}
