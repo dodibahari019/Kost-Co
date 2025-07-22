@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SewaKamarController;
+use App\Http\Controllers\DendaController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -55,6 +56,18 @@ Route::controller(SewaKamarController::class)->group(function(){
     // CRUD
     Route::get('/pengelolaan-sewa-kamar/edit/{idSewaKamar}', 'edit');
     Route::put('/pengelolaan-sewa-kamar/update/{idSewaKamar}', 'update');
+});
+
+Route::controller(DendaController::class)->group(function(){
+    Route::get('/pengelolaan-denda', 'index');
+    // DATATABLE
+    Route::get('/pengelolaan-denda/viewDenda', 'viewDenda');
+    Route::get('/pengelolaan-denda/getViewDenda', 'getViewDenda');
+    Route::get('/pengelolaan-denda/dataTableViewDenda', 'dataTableViewDenda');
+    Route::get('/pengelolaan-denda/isidataTableViewDenda', 'isidataTableViewDenda');
+    // CRUD
+    Route::get('/pengelolaan-denda/edit/{idDenda}', 'edit');
+    Route::put('/pengelolaan-denda/update/{idDenda}', 'update');
 });
 
 Route::view('dashboard', 'dashboard')

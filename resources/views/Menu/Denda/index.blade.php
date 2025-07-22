@@ -2,7 +2,7 @@
 @section('Css')
 
 @endsection
-@section('Title', 'Pengelolaan Kamar')
+@section('Title', 'Pengelolaan Denda')
 @section('tabView')
 <div id="tabView-content-body" ></div>
 @endsection
@@ -24,7 +24,7 @@
                 <div class="card-body">
                 <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="custom-tabs-one-pengajuanbpkb" role="tabpanel" aria-labelledby="custom-tabs-one-pengajuanbpkb-tab">
-                        @include('Menu.Kamar.Data.index')
+                        @include('Menu.Denda.Data.index')
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-one-history" role="tabpanel" aria-labelledby="custom-tabs-one-history-tab">
                         {{-- @include('Menu.Pengecekan.Karyawan.History.index') --}}
@@ -44,11 +44,11 @@
 <script>
     var dataTableData = [
         {
-            idTable : "#DataKamarTableId",
+            idTable : "#DataDendaTableId",
             tblColumns : [0, 1, 2,3 ],
             dom: 'Bfrtip',
             btnNames : ['excelHtml5', 'pdfHtml5', 'print'],
-            url : "/pengelolaan-kamar/getViewKamar",
+            url : "/pengelolaan-denda/getViewDenda",
             method : "GET",
             noBtnPrint: true,
             bPaginate: true,
@@ -63,16 +63,16 @@
         },
         {
             data:  [
-                {data: 'DT_RowIndex', className: 'text-center'},
+                { data: 'DT_RowIndex', className: 'text-center' },
+                { data: 'nama' },
                 { data: 'nomor_kamar' },
-                { data: 'ukuran' },
-                { data: 'tipe' },
-                {
-                    data: 'harga_sewa',
+                { data: 'tanggal_jatuh_tempo' },
+                { 
+                    data: 'jumlah_denda', 
                     className: 'text-right',
                     render: $.fn.dataTable.render.number('.', '.', ''),
                 },
-                { data: 'status_denda' },
+                { data: 'status_penghuni' },
                 {data: 'action', className: 'text-center', orderable: false, searchable: false},
             ]
         }
@@ -80,8 +80,8 @@
 </script>
 <script>
     $(document).ready(function(){
-        var id = $('#cardContentDataKamar'),
-            url = "/pengelolaan-kamar/viewKamar";
+        var id = $('#cardContentDataDenda'),
+            url = "/pengelolaan-denda/viewDenda";
         $.get(url, function(table) {
                 $(id).html(table);
                 // alert('ola');
@@ -91,39 +91,39 @@
     })
 </script>
 <script>
-    function FillTheVoidKamar(x){
-        document.getElementById('idFillTheVoidKamar').value = x
+    function FillTheVoidDenda(x){
+        document.getElementById('idFillTheVoidDenda').value = x
     }
 
-    function RunTheButtonSearchKamar(){
-        document.getElementById('idButtonVoidKamar').click();
+    function RunTheButtonSearchDenda(){
+        document.getElementById('idButtonVoidDenda').click();
     }
 
-    function EnterRunningNowKamar(event){
+    function EnterRunningNowDenda(event){
         if (event.key == 'Enter' || event.keyCode == 13){
             event.preventDefault();
-            RunTheButtonSearchKamar();
+            RunTheButtonSearchDenda();
         }
     }
-    </script>
+</script>
 <script>
-    $(document).on("submit", "#frmViewDataKamar", function(e) {
+    $(document).on("submit", "#frmViewDataDenda", function(e) {
         e.preventDefault();
         var me = $(this),
         id = me.attr('id');
         var url = me.attr('action');
         var frmData = me.serialize();
-        var valP = $('#' + id + ' input[name="namaKamar"]').val();
+        var valP = $('#' + id + ' input[name="namaDenda"]').val();
         var not = {valP: valP}
-        $.get("/pengelolaan-kamar/dataTableViewKamar", function(tbl) {
-            $("#cardContentDataKamar").html(tbl);
-            $(tblViewDataKamar(not));
+        $.get("/pengelolaan-denda/dataTableViewDenda", function(tbl) {
+            $("#cardContentDataDenda").html(tbl);
+            $(tblViewDataDenda(not));
         });
     });
 
-    function tblViewDataKamar(not) {
-        var url = not == undefined ? "/pengelolaan-kamar/isidataTableViewkamar" : "/pengelolaan-kamar/isidataTableViewKamar?namaKamar=" + encodeURIComponent(not.valP) ;
-        var table = $("#DataKamarTableId").DataTable({
+    function tblViewDataDenda(not) {
+        var url = not == undefined ? "/pengelolaan-denda/isidataTableViewDenda" : "/pengelolaan-denda/isidataTableViewDenda?namaDenda=" + encodeURIComponent(not.valP) ;
+        var table = $("#DataDendaTableId").DataTable({
             "responsive": false,
             "lengthChange": false,
             "autoWidth": true,
@@ -131,17 +131,15 @@
             "destroy": true,
             "columns": [
                 {data: 'DT_RowIndex', className: 'text-center'},
+                { data: 'nama' },
                 { data: 'nomor_kamar' },
-                { data: 'ukuran' },
-                { data: 'tipe' },
-                {
-                    data: 'harga_sewa',
+                { data: 'tanggal_jatuh_tempo' },
+                { 
+                    data: 'jumlah_denda', 
                     className: 'text-right',
                     render: $.fn.dataTable.render.number('.', '.', ''),
                 },
-                { data: 'status_kamar' },
-                { data: 'tanggal_mulai_sewa' },
-                { data: 'tanggal_selesai_sewa' },
+                { data: 'status_penghuni' },
                 {data: 'action', className: 'text-center', orderable: false, searchable: false}
             ],
             // "dom": 'Bfrtip',
@@ -157,7 +155,7 @@
             // "scrollY": 'calc(100vh - 32rem)',
             "ajax": url,
             "initComplete": function(settings, json) {
-                table.buttons().container().appendTo('#DataKamarTableId_wrapper .col-md-6:eq(0)');
+                table.buttons().container().appendTo('#DataDendaTableId_wrapper .col-md-6:eq(0)');
             }
         });
     }
