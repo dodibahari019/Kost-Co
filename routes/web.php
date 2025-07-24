@@ -16,7 +16,8 @@ use App\Http\Controllers\TProfileController;
 // })->name('home');
 
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/loginPenghuni', 'loginView');
+    Route::get('/loginUser', 'loginView');
+    Route::get('/registerUser', 'registerView');
 });
 
 Route::controller(HomeController::class)->group(function(){
