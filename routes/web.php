@@ -7,13 +7,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SewaKamarController;
+use App\Http\Controllers\DendaController;
+use App\Http\Controllers\TKamarController;
+use App\Http\Controllers\TProfileController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');
 
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/loginPenghuni', 'loginView');
+    Route::get('/loginUser', 'loginView');
+    Route::get('/registerUser', 'registerView');
 });
 
 Route::controller(HomeController::class)->group(function(){
@@ -55,6 +59,36 @@ Route::controller(SewaKamarController::class)->group(function(){
     // CRUD
     Route::get('/pengelolaan-sewa-kamar/edit/{idSewaKamar}', 'edit');
     Route::put('/pengelolaan-sewa-kamar/update/{idSewaKamar}', 'update');
+});
+
+Route::controller(DendaController::class)->group(function(){
+    Route::get('/pengelolaan-denda', 'index');
+    // DATATABLE
+    Route::get('/pengelolaan-denda/viewDenda', 'viewDenda');
+    Route::get('/pengelolaan-denda/getViewDenda', 'getViewDenda');
+    Route::get('/pengelolaan-denda/dataTableViewDenda', 'dataTableViewDenda');
+    Route::get('/pengelolaan-denda/isidataTableViewDenda', 'isidataTableViewDenda');
+    // CRUD
+    Route::get('/pengelolaan-denda/edit/{idDenda}', 'edit');
+    Route::put('/pengelolaan-denda/update/{idDenda}', 'update');
+});
+
+Route::controller(TKamarController::class)->group(function(){
+    Route::get('/list-kamar', 'index');
+    // DATATABLE
+    Route::get('/list-kamar/viewListKamar', 'viewListKamar');
+    Route::get('/list-kamar/getViewListKamar', 'getViewListKamar');
+    Route::get('/list-kamar/dataTableViewListKamar', 'dataTableViewListKamar');
+    Route::get('/list-kamar/cardViewListKamar', 'cardViewListKamar');
+});
+
+Route::controller(TProfileController::class)->group(function(){
+    Route::get('/profile-penghuni', 'index');
+    // DATATABLE
+    Route::get('/profile-penghuni/viewProfilePenghuni', 'viewProfilePenghuni');
+    Route::get('/profile-penghuni/getViewProfilePenghuni', 'getViewProfilePenghuni');
+    Route::get('/profile-penghuni/dataTableViewProfilePenghuni', 'dataTableViewProfilePenghuni');
+    Route::get('/profile-penghuni/cardViewProfilePenghuni', 'cardViewProfilePenghuni');
 });
 
 Route::view('dashboard', 'dashboard')

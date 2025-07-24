@@ -18,6 +18,7 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+        {{-- PENGURUS --}}
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -101,6 +102,84 @@
                 </a>
               </li>
             </ul>
+          </li>
+          {{-- PENGHUNI --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas  fa-building"></i>
+              <p>
+                Kamar
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/list-kamar" class="nav-link">
+                  <i class="fas fa-bed nav-icon"></i>
+                  <p>List Kamar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Ajuan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-door-closed nav-icon"></i>
+                  <p>Ajuan Pindah Kamar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-door-open nav-icon"></i>
+                  <p>Ajuan Check Out</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-tools nav-icon"></i>
+                  <p>Ajuan Perbaikan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Pembayaran
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/laporan" class="nav-link">
+                  <i class="fas fa-usd nav-icon"></i>
+                  <p>Sewa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/laporan" class="nav-link">
+                  <i class="fas fa-usd nav-icon"></i>
+                  <p>Denda</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/profile-penghuni" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
