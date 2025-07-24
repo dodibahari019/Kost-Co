@@ -114,7 +114,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/list-kamar" class="nav-link">
                   <i class="fas fa-bed nav-icon"></i>
                   <p>List Kamar</p>
                 </a>
@@ -174,7 +174,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/profile-penghuni" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile

@@ -8,6 +8,8 @@ use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SewaKamarController;
 use App\Http\Controllers\DendaController;
+use App\Http\Controllers\TKamarController;
+use App\Http\Controllers\TProfileController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -68,6 +70,24 @@ Route::controller(DendaController::class)->group(function(){
     // CRUD
     Route::get('/pengelolaan-denda/edit/{idDenda}', 'edit');
     Route::put('/pengelolaan-denda/update/{idDenda}', 'update');
+});
+
+Route::controller(TKamarController::class)->group(function(){
+    Route::get('/list-kamar', 'index');
+    // DATATABLE
+    Route::get('/list-kamar/viewListKamar', 'viewListKamar');
+    Route::get('/list-kamar/getViewListKamar', 'getViewListKamar');
+    Route::get('/list-kamar/dataTableViewListKamar', 'dataTableViewListKamar');
+    Route::get('/list-kamar/cardViewListKamar', 'cardViewListKamar');
+});
+
+Route::controller(TProfileController::class)->group(function(){
+    Route::get('/profile-penghuni', 'index');
+    // DATATABLE
+    Route::get('/profile-penghuni/viewProfilePenghuni', 'viewProfilePenghuni');
+    Route::get('/profile-penghuni/getViewProfilePenghuni', 'getViewProfilePenghuni');
+    Route::get('/profile-penghuni/dataTableViewProfilePenghuni', 'dataTableViewProfilePenghuni');
+    Route::get('/profile-penghuni/cardViewProfilePenghuni', 'cardViewProfilePenghuni');
 });
 
 Route::view('dashboard', 'dashboard')
