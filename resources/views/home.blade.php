@@ -4,7 +4,7 @@
 @endsection
 @section('Title', 'Home')
 @section('BodyOfContent')
-<p>INI HALAMAN HOME</p>
+<p>INI HALAMAN HOME WOI</p>
 @endsection
 
 @section('Javascript')
